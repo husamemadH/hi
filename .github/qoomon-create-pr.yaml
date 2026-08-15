@@ -1,0 +1,44 @@
+name: qoomon workflow will succeed
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+
+jobs:
+  test-job:
+    runs-on: self-hosted
+    steps:
+      - uses: qoomon/actions--access-token@v3
+        id: access-token
+        with:
+          owner: ohamadeh
+          repository: argocd-example-apps
+          permissions: |
+            contents: write
+            pull-requests: write
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+        with:
+          repository: ohamadeh/argocd-example-apps
+          token: ${{ steps.access-token.outputs.token }}
+
+      - name: Make a change to open a PR for
+        run: |
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > helloworld.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        with:
+          commit-message: |
+            chore: qoomon token permission test
+
+            Verifies the qoomon/actions--access-token token can open pull
+            requests via the `contents: write` / `pull-requests: write` scopes.
+          branch: qoomon
+          branch-suffix: timestamp
+          sign-commits: true
+          title: "chore: qoomon token permission test"
+          token: ${{ steps.access-token.outputs.token }}

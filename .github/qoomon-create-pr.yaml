@@ -14,8 +14,8 @@ jobs:
       - uses: qoomon/actions--access-token@v3
         id: access-token
         with:
-          owner: ohamadeh
-          repository: argocd-example-apps
+          owner: husamemadH
+          repository: hi
           permissions: |
             contents: write
             pull-requests: write

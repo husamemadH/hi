@@ -22,7 +22,7 @@ jobs:
       - name: Checkout target repo
         uses: actions/checkout@v4
         with:
-          repository: ohamadeh/argocd-example-apps
+          repository: husamemadH/hi
           token: ${{ steps.access-token.outputs.token }}
 
       - name: Make a change to open a PR for

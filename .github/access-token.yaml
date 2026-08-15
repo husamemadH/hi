@@ -1,0 +1,10 @@
+origin: husamemadh/hi
+
+
+# Define what permissions can be granted
+statements:
+  - subjects:
+      - 'repo:husamemadH@135509168/hi@1328891649:**' # any workflow from any branch
+    permissions:
+      contents: write  # Allow pushing
+      pull-requests: write # Allow creating pull requests
